@@ -11,4 +11,6 @@ Gitの使い方や、作業の流れを理解するための課題用。
     1. `SSH`タブを選択し、`git@auto3tsv132:(自分のID)/Hit-and-Blow.git`をコピー
     1. GitBashで`git clone git@～(先程コピーしたもの)`を叩く
         - Bashでの貼り付け操作は`Shift`+`Insert`
+1. Submoduleを初期化する
+    - Gitで`git submodule update --init`を叩く
 1. 作業する
