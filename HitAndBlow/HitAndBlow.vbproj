@@ -109,7 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fw\Fhi.Fw\Fhi.Fw.vbproj">
-      <Project>{8D9EF493-1DB9-4B5D-A205-22513969D5B2}</Project>
+      <Project>{8d9ef493-1db9-4b5d-a205-22513969d5b2}</Project>
       <Name>Fhi.Fw</Name>
     </ProjectReference>
   </ItemGroup>
