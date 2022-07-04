@@ -31,16 +31,7 @@
                 computerNumber.RemoveAt(hitIndex)
                 playerNumber.RemoveAt(hitIndex)
             Next
-
-            For j As Integer = 0 To computerNumber.Count - 1
-                For k As Integer = 0 To playerNumber.Count - 1
-                    If computerNumber(j) = playerNumber(k) Then
-                        blow += 1
-                        playerNumber.RemoveAt(k)
-                        Exit For
-                    End If
-                Next
-            Next
+            blow = CountNumberOfBlow(computerNumber, playerNumber)
 
         End If
 
@@ -65,6 +56,30 @@
         Next
 
         Return hit
+
+    End Function
+
+    ''' <summary>
+    ''' computerNumberと同じ数字をplayerNumberが持っていればblowに1を足す
+    ''' </summary>
+    ''' <param name="computerNumber"></param>
+    ''' <param name="playerNumber"></param>
+    ''' <returns></returns>
+    Public Function CountNumberOfBlow(computerNumber As List(Of Char), playerNumber As List(Of Char)) As Integer
+        Dim blow As Integer = 0
+        Dim playerNumberForComparison As New List(Of Char)(playerNumber)
+
+        For i As Integer = 0 To computerNumber.Count - 1
+            For j As Integer = 0 To playerNumberForComparison.Count - 1
+                If computerNumber(i) = playerNumberForComparison(j) Then
+                    blow += 1
+                    playerNumberForComparison.RemoveAt(j)
+                    Exit For
+                End If
+            Next
+        Next
+
+        Return blow
 
     End Function
 
