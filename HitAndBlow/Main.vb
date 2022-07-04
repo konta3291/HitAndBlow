@@ -13,20 +13,13 @@
         Dim computerNumber As New List(Of Char)(New Char() {"1"c, "2"c, "3"c, "4"c})
         Dim playerNumber As New List(Of Char)(playerAnswer.ToString.ToCharArray)
         Dim blow As Integer = 0
-        'hitした数字はblowでは比較しないので削除します。hitの位置を記録します
-        Dim hitIndexs As New List(Of Integer)
 
         Dim hit As Integer = CountNumberOfHit(computerNumber, playerNumber)
-        For i As Integer = 0 To computerNumber.Count - 1
-            If computerNumber(i) = playerNumber(i) Then
-                hitIndexs.Add(i)
-            End If
-        Next
 
         If hit < 4 Then
 
-            '反転させ数字の大きい方から削除します
-            hitIndexs.Reverse()
+            'hitした数字はblowでは比較しないので削除します。hitの位置を記録します
+            Dim hitIndexs As New List(Of Integer)(GetHitIndexs(computerNumber, playerNumber))
             For Each hitIndex As Integer In hitIndexs
                 computerNumber.RemoveAt(hitIndex)
                 playerNumber.RemoveAt(hitIndex)
@@ -80,6 +73,26 @@
         Next
 
         Return blow
+
+    End Function
+
+    ''' <summary>
+    ''' 2つのリストを比較し数字が同じだった場所を返す
+    ''' </summary>
+    ''' <param name="computerNumber"></param>
+    ''' <param name="playerNumber"></param>
+    ''' <returns></returns>
+    Public Function GetHitIndexs(computerNumber As List(Of Char), playerNumber As List(Of Char)) As List(Of Integer)
+        Dim hitIndexs As New List(Of Integer)
+
+        For i As Integer = 0 To computerNumber.Count - 1
+            If computerNumber(i) = playerNumber(i) Then
+                hitIndexs.Add(i)
+            End If
+        Next
+        '反転させ数字の大きい方を先頭にします
+        hitIndexs.Reverse()
+        Return hitIndexs
 
     End Function
 
