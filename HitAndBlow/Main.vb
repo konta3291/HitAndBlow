@@ -20,10 +20,8 @@
 
             'hitした数字はblowでは比較しないので削除します。hitの位置を記録します
             Dim hitIndexs As New List(Of Integer)(GetHitIndexs(computerNumber, playerNumber))
-            For Each hitIndex As Integer In hitIndexs
-                computerNumber.RemoveAt(hitIndex)
-                playerNumber.RemoveAt(hitIndex)
-            Next
+            computerNumber = DeleteHitNumber(computerNumber, hitIndexs)
+            playerNumber = DeleteHitNumber(playerNumber, hitIndexs)
             blow = CountNumberOfBlow(computerNumber, playerNumber)
 
         End If
@@ -93,6 +91,23 @@
         '反転させ数字の大きい方を先頭にします
         hitIndexs.Reverse()
         Return hitIndexs
+
+    End Function
+
+    ''' <summary>
+    ''' ヒットだった数字を消したリストを返す
+    ''' </summary>
+    ''' <param name="Number"></param>
+    ''' <param name="hitIndexs"></param>
+    ''' <returns></returns>
+    Public Function DeleteHitNumber(Number As List(Of Char), hitIndexs As List(Of Integer)) As List(Of Char)
+        Dim returnNumber As New List(Of Char)(Number)
+
+        For Each deleteIndex As Integer In hitIndexs
+            returnNumber.RemoveAt(deleteIndex)
+        Next
+
+        Return returnNumber
 
     End Function
 
