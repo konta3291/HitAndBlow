@@ -97,11 +97,11 @@
     ''' <summary>
     ''' ヒットだった数字を消したリストを返す
     ''' </summary>
-    ''' <param name="Number"></param>
+    ''' <param name="number"></param>
     ''' <param name="hitIndexs"></param>
     ''' <returns></returns>
-    Public Function DeleteHitNumber(Number As List(Of Char), hitIndexs As List(Of Integer)) As List(Of Char)
-        Dim returnNumber As New List(Of Char)(Number)
+    Public Function DeleteHitNumber(number As List(Of Char), hitIndexs As List(Of Integer)) As List(Of Char)
+        Dim returnNumber As New List(Of Char)(number)
 
         For Each deleteIndex As Integer In hitIndexs
             returnNumber.RemoveAt(deleteIndex)
