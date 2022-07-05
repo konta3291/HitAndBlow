@@ -1,7 +1,10 @@
 ﻿Public Module Main
 
     Sub Main()
-
+        Console.WriteLine("ヒット＆ブロー")
+        Console.Write("数字を入力してください：")
+        Dim playerNumber As String = Console.ReadLine()
+        Console.Write(ReturnResultOfHitAndBlowGame(playerNumber))
     End Sub
 
     ''' <summary>
