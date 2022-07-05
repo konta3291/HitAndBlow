@@ -26,7 +26,7 @@
 
         End If
 
-        Dim result As String = ("Hit:" & hit.ToString & "," & "Blow:" & blow.ToString)
+        Dim result = $"Hit:{hit},Blow:{blow}"
         Return result
 
     End Function
