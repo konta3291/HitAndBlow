@@ -9,9 +9,9 @@
     ''' </summary>
     ''' <param name="playerAnswer"></param>
     ''' <returns></returns>
-    Public Function ReturnResultOfHitAndBlowGame(playerAnswer As Integer) As String
+    Public Function ReturnResultOfHitAndBlowGame(playerAnswer As String) As String
         Dim computerNumber As New List(Of Char)(New Char() {"1"c, "2"c, "3"c, "4"c})
-        Dim playerNumber As New List(Of Char)(playerAnswer.ToString.ToCharArray)
+        Dim playerNumber As New List(Of Char)(playerAnswer.ToCharArray)
         Dim blow As Integer = 0
 
         Dim hit As Integer = CountNumberOfHit(computerNumber, playerNumber)
