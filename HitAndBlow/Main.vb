@@ -20,6 +20,8 @@
 
             'hitした数字はblowでは比較しないので削除します。hitの位置を記録します
             Dim hitIndexs As New List(Of Integer)(GetHitIndexs(computerNumber, playerNumber))
+            '反転させ数字の大きい方を先頭にします
+            hitIndexs.Reverse()
             computerNumber = DeleteHitNumber(computerNumber, hitIndexs)
             playerNumber = DeleteHitNumber(playerNumber, hitIndexs)
             blow = CountNumberOfBlow(computerNumber, playerNumber)
@@ -88,8 +90,6 @@
                 hitIndexs.Add(i)
             End If
         Next
-        '反転させ数字の大きい方を先頭にします
-        hitIndexs.Reverse()
         Return hitIndexs
 
     End Function
