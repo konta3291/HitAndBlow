@@ -1,9 +1,11 @@
-﻿Public Module Main
+﻿Imports System.Text.RegularExpressions
+Public Module Main
 
     Sub Main()
         Console.WriteLine("ヒット＆ブロー")
         Console.Write("数字を入力してください：")
         Dim playerNumber As String = Console.ReadLine()
+        VerifyValue(playerNumber)
         Console.Write(ReturnResultOfHitAndBlowGame(playerNumber))
     End Sub
 
@@ -113,5 +115,19 @@
         Return returnNumber
 
     End Function
+
+    ''' <summary>
+    ''' 受け取った値が四桁の整数であるか確認する
+    ''' 違う場合はエラーと返す
+    ''' </summary>
+    ''' <param name="playerAnswer"></param>
+    Private Sub VerifyValue(playerAnswer As String)
+
+        If Regex.IsMatch(playerAnswer, "^[0-9]{1,4}$") AndAlso playerAnswer.Length = 4 Then
+        Else
+            Throw New ArgumentException("受け取った数値は４桁の整数ではありません")
+        End If
+
+    End Sub
 
 End Module

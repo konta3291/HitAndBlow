@@ -30,4 +30,40 @@ Imports NUnit.Framework
 
     End Sub
 
+    <Test()> Public Sub 五桁目以上はエラーと返す()
+
+        Assert.That(Sub() Main.ReturnResultOfHitAndBlowGame("12345"), Throws.TypeOf(Of ArgumentException)().And.Message.EqualTo("受け取った数値は４桁の整数ではありません"))
+
+    End Sub
+
+    <Test()> Public Sub 三桁以下はエラーと返す()
+
+        Assert.That(Sub() Main.ReturnResultOfHitAndBlowGame("123"), Throws.TypeOf(Of ArgumentException)().And.Message.EqualTo("受け取った数値は４桁の整数ではありません"))
+
+    End Sub
+
+    <Test()> Public Sub 負の値はエラーと返す()
+
+        Assert.That(Sub() Main.ReturnResultOfHitAndBlowGame("-123"), Throws.TypeOf(Of ArgumentException)().And.Message.EqualTo("受け取った数値は４桁の整数ではありません"))
+
+    End Sub
+
+    <Test()> Public Sub 小数点はエラーと返す()
+
+        Assert.That(Sub() Main.ReturnResultOfHitAndBlowGame("1.538"), Throws.TypeOf(Of ArgumentException)().And.Message.EqualTo("受け取った数値は４桁の整数ではありません"))
+
+    End Sub
+
+    <Test()> Public Sub 空はエラーと返す()
+
+        Assert.That(Sub() Main.ReturnResultOfHitAndBlowGame(""), Throws.TypeOf(Of ArgumentException)().And.Message.EqualTo("受け取った数値は４桁の整数ではありません"))
+
+    End Sub
+
+    <Test()> Public Sub 文字を含む場合はエラーと返す()
+
+        Assert.That(Sub() Main.ReturnResultOfHitAndBlowGame("12a4"), Throws.TypeOf(Of ArgumentException)().And.Message.EqualTo("受け取った数値は４桁の整数ではありません"))
+
+    End Sub
+
 End Class
