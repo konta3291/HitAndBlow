@@ -15,7 +15,7 @@ Public Module Main
     ''' <param name="playerAnswer"></param>
     ''' <returns></returns>
     Public Function ReturnResultOfHitAndBlowGame(playerAnswer As String) As String
-        Dim computerNumber As New List(Of Char)(New Char() {"1"c, "2"c, "3"c, "4"c})
+        Dim computerNumber As New List(Of Char)(MakeComputerNumber)
         Dim playerNumber As New List(Of Char)(playerAnswer.ToCharArray)
         Dim blow As Integer = 0
 
@@ -129,5 +129,16 @@ Public Module Main
         End If
 
     End Sub
+
+    ''' <summary>
+    ''' コンピュータの数字を四桁ランダムに生成します
+    ''' </summary>
+    ''' <returns></returns>
+    Private Function MakeComputerNumber() As Char()
+        Dim random = New System.Random
+        Dim computerNumber As Char() = New Char() {random.Next(10).ToString,
+          random.Next(10).ToString, random.Next(10).ToString, random.Next(10).ToString}
+        Return computerNumber
+    End Function
 
 End Module
