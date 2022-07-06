@@ -145,14 +145,15 @@ Public Module Main
 
     ''' <summary>
     ''' 受け取った値が四桁の整数であるか確認する
-    ''' 違う場合はエラーと返す
+    ''' 違う場合はもう一度入力させる
     ''' </summary>
     ''' <param name="playerAnswer"></param>
     Private Sub VerifyValue(playerAnswer As String)
 
         If Regex.IsMatch(playerAnswer, "^[0-9]{1,4}$") AndAlso playerAnswer.Length = 4 Then
         Else
-            Throw New ArgumentException("受け取った数値は４桁の整数ではありません")
+            Console.WriteLine("受け取った数値は４桁の整数ではありません")
+            HitAndBlow()
         End If
 
     End Sub
