@@ -1,21 +1,29 @@
 ﻿Imports System.Text.RegularExpressions
 Public Module Main
-
+    Private computerAnswer As List(Of Char)
     Sub Main()
         Console.WriteLine("ヒット＆ブロー")
+        computerAnswer = New List(Of Char)(MakeComputerNumber)
+        HitAndBlow()
+        Console.Write("成功です")
+    End Sub
+
+    ''' <summary>
+    ''' 数字の入力を受けとりヒット＆ブローゲームを始めます
+    ''' </summary>
+    Private Sub HitAndBlow()
         Console.Write("数字を入力してください：")
         Dim playerNumber As String = Console.ReadLine()
         VerifyValue(playerNumber)
-        Console.Write(ReturnResultOfHitAndBlowGame(playerNumber))
+        ReturnResultOfHitAndBlowGame(playerNumber)
     End Sub
 
     ''' <summary>
     ''' 数字を受け取りヒット＆ブローの結果を返す
     ''' </summary>
     ''' <param name="playerAnswer"></param>
-    ''' <returns></returns>
-    Public Function ReturnResultOfHitAndBlowGame(playerAnswer As String) As String
-        Dim computerNumber As New List(Of Char)(MakeComputerNumber)
+    Public Sub ReturnResultOfHitAndBlowGame(playerAnswer As String)
+        Dim computerNumber As New List(Of Char)(computerAnswer)
         Dim playerNumber As New List(Of Char)(playerAnswer.ToCharArray)
         Dim blow As Integer = 0
 
@@ -32,11 +40,12 @@ Public Module Main
             blow = CountNumberOfBlow(computerNumber, playerNumber)
 
         End If
-
         Dim result = $"Hit:{hit},Blow:{blow}"
-        Return result
-
-    End Function
+        Console.WriteLine(result)
+        If hit <> 4 Then
+            HitAndBlow()
+        End If
+    End Sub
 
     ''' <summary>
     ''' 受け取った2つのリストを比較し、数字が同じであればhitに1を足す
