@@ -5,7 +5,25 @@ Public Module Main
         Console.WriteLine("ヒット＆ブロー")
         computerAnswer = New List(Of Char)(MakeComputerNumber)
         HitAndBlow()
-        Console.Write("成功です")
+        Console.WriteLine("成功です")
+        AskPlayerWantToPlayAgain()
+    End Sub
+
+    ''' <summary>
+    ''' もう一度ヒット＆ブローを遊ぶか聞きます
+    ''' </summary>
+    Private Sub AskPlayerWantToPlayAgain()
+        Console.WriteLine("もう一度遊びますか")
+        Console.WriteLine("遊ぶ場合は：[y]・遊ばない場合は：[n]")
+        Dim playerAnswer As String = Console.ReadLine()
+
+        If playerAnswer.Equals("y") Then
+            Main()
+        ElseIf playerAnswer.Equals("n") Then
+            Environment.Exit(0)
+        Else
+            AskPlayerWantToPlayAgain()
+        End If
     End Sub
 
     ''' <summary>
