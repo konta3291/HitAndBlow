@@ -162,7 +162,7 @@ Public Module Main
     ''' コンピュータの数字を四桁ランダムに生成します
     ''' </summary>
     ''' <returns></returns>
-    Private Function MakeComputerNumber() As Char()
+    Public Function MakeComputerNumber() As Char()
         Dim random = New System.Random
         Dim computerNumber As Char() = New Char() {random.Next(10).ToString,
           random.Next(10).ToString, random.Next(10).ToString, random.Next(10).ToString}
