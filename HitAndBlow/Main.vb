@@ -66,7 +66,7 @@ Public Module Main
     End Sub
 
     ''' <summary>
-    ''' 受け取った2つのリストを比較し、数字が同じであればhitに1を足す
+    ''' 受け取った2つのリストを比較し、位置と数字が同じものがいくつあったかカウントしその値を返す
     ''' </summary>
     ''' <param name="computerNumber"></param>
     ''' <param name="playerNumber"></param>
