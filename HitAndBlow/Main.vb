@@ -27,40 +27,33 @@ Public Module Main
     End Sub
 
     ''' <summary>
-    ''' 数字の入力を受けとりヒット＆ブローゲームを始めます
+    ''' ヒット＆ブローの処理をします
     ''' </summary>
-    Private Sub HitAndBlow()
-        Dim playerNumber As String = GetPlayerNumber()
-        ReturnResultOfHitAndBlowGame(playerNumber)
-    End Sub
+    Public Sub HitAndBlow()
+        Dim hit As Integer = 0
+        While hit <> 4
+            Dim computerNumber As New List(Of Char)(computerAnswer)
+            Dim playerNumber As New List(Of Char)(GetPlayerNumber.ToCharArray)
+            Dim blow As Integer = 0
 
-    ''' <summary>
-    ''' 数字を受け取りヒット＆ブローの結果を返す
-    ''' </summary>
-    ''' <param name="playerAnswer"></param>
-    Public Sub ReturnResultOfHitAndBlowGame(playerAnswer As String)
-        Dim computerNumber As New List(Of Char)(computerAnswer)
-        Dim playerNumber As New List(Of Char)(playerAnswer.ToCharArray)
-        Dim blow As Integer = 0
+            hit = CountNumberOfHit(computerNumber, playerNumber)
 
-        Dim hit As Integer = CountNumberOfHit(computerNumber, playerNumber)
+            If hit < 4 Then
 
-        If hit < 4 Then
+                'hitした数字はblowでは比較しないので削除します。hitの位置を記録します
+                Dim hitIndexs As New List(Of Integer)(GetHitIndexs(computerNumber, playerNumber))
+                '反転させ数字の大きい方を先頭にします
+                hitIndexs.Reverse()
+                computerNumber = DeleteHitNumber(computerNumber, hitIndexs)
+                playerNumber = DeleteHitNumber(playerNumber, hitIndexs)
+                blow = CountNumberOfBlow(computerNumber, playerNumber)
 
-            'hitした数字はblowでは比較しないので削除します。hitの位置を記録します
-            Dim hitIndexs As New List(Of Integer)(GetHitIndexs(computerNumber, playerNumber))
-            '反転させ数字の大きい方を先頭にします
-            hitIndexs.Reverse()
-            computerNumber = DeleteHitNumber(computerNumber, hitIndexs)
-            playerNumber = DeleteHitNumber(playerNumber, hitIndexs)
-            blow = CountNumberOfBlow(computerNumber, playerNumber)
+            End If
+            Dim result = $"Hit:{hit},Blow:{blow}"
+            Console.WriteLine(result)
 
-        End If
-        Dim result = $"Hit:{hit},Blow:{blow}"
-        Console.WriteLine(result)
-        If hit <> 4 Then
-            HitAndBlow()
-        End If
+        End While
+
     End Sub
 
     ''' <summary>
