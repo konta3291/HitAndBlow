@@ -2,29 +2,34 @@
 Public Module Main
     Private computerAnswer As List(Of Char)
     Sub Main()
-        Console.WriteLine("ヒット＆ブロー")
+        Dim play As Boolean = True
+        While play = True
+            Console.WriteLine("ヒット＆ブロー")
         computerAnswer = New List(Of Char)(MakeComputerNumber)
         HitAndBlow()
         Console.WriteLine("成功です")
-        AskPlayerWantToPlayAgain()
+            play = AskPlayerWantToPlayAgain()
+        End While
     End Sub
 
     ''' <summary>
     ''' もう一度ヒット＆ブローを遊ぶか聞きます
     ''' </summary>
-    Private Sub AskPlayerWantToPlayAgain()
-        Console.WriteLine("もう一度遊びますか")
-        Console.WriteLine("遊ぶ場合は：[y]・遊ばない場合は：[n]")
-        Dim playerAnswer As String = Console.ReadLine()
+    Private Function AskPlayerWantToPlayAgain() As Boolean
+        Dim playerAnswer As String = ""
+
+        While (playerAnswer.Equals("y") OrElse playerAnswer.Equals("n")) = False
+            Console.WriteLine("もう一度遊びますか")
+            Console.WriteLine("遊ぶ場合は：[y]・遊ばない場合は：[n]")
+            playerAnswer = Console.ReadLine()
+        End While
 
         If playerAnswer.Equals("y") Then
-            Main()
-        ElseIf playerAnswer.Equals("n") Then
-            Environment.Exit(0)
+            Return True
         Else
-            AskPlayerWantToPlayAgain()
+            Return False
         End If
-    End Sub
+    End Function
 
     ''' <summary>
     ''' ヒット＆ブローの処理をします
