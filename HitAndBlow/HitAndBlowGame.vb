@@ -24,8 +24,7 @@
                 blow = CountNumberOfBlow(computerNumber, playerNumber)
 
             End If
-            Dim result = $"Hit:{hit},Blow:{blow}"
-            Console.WriteLine(result)
+            Main.ShowHitAndBlowResult(hit, blow)
 
         End While
 

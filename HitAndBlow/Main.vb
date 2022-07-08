@@ -47,4 +47,14 @@ Public Module Main
 
     End Function
 
+    ''' <summary>
+    ''' ヒット＆ブローの結果を表示する
+    ''' </summary>
+    ''' <param name="hit"></param>
+    ''' <param name="blow"></param>
+    Public Sub ShowHitAndBlowResult(hit As Integer, blow As Integer)
+        Dim result = $"Hit:{hit},Blow:{blow}"
+        Console.WriteLine(result)
+    End Sub
+
 End Module
