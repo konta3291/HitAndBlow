@@ -74,7 +74,7 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HitAndBlow.Test.vb" />
+    <Compile Include="HitAndBlowGame.Test.vb" />
     <Compile Include="Main.Test.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
