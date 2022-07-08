@@ -85,7 +85,7 @@ Public Module Main
     End Function
 
     ''' <summary>
-    ''' computerNumberと同じ数字をplayerNumberが持っていればblowに1を足す
+    ''' 受け取った2つのリストを比較し、数字が同じものがいくつあったかカウントしその値を返す
     ''' </summary>
     ''' <param name="computerNumber"></param>
     ''' <param name="playerNumber"></param>
