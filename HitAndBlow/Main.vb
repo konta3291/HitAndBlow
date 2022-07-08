@@ -30,9 +30,7 @@ Public Module Main
     ''' 数字の入力を受けとりヒット＆ブローゲームを始めます
     ''' </summary>
     Private Sub HitAndBlow()
-        Console.Write("数字を入力してください：")
-        Dim playerNumber As String = Console.ReadLine()
-        VerifyValue(playerNumber)
+        Dim playerNumber As String = GetPlayerNumber()
         ReturnResultOfHitAndBlowGame(playerNumber)
     End Sub
 
@@ -144,19 +142,21 @@ Public Module Main
     End Function
 
     ''' <summary>
-    ''' 受け取った値が四桁の整数であるか確認する
-    ''' 違う場合はもう一度入力させる
+    ''' プレイヤーからヒット＆ブローゲームで遊ぶための四桁の整数を受け取る
     ''' </summary>
-    ''' <param name="playerAnswer"></param>
-    Private Sub VerifyValue(playerAnswer As String)
+    Private Function GetPlayerNumber() As String
+        Console.Write("数字を入力してください：")
+        Dim playerNumber As String = Console.ReadLine()
 
-        If Regex.IsMatch(playerAnswer, "^[0-9]{1,4}$") AndAlso playerAnswer.Length = 4 Then
-        Else
+        While (Regex.IsMatch(playerNumber, "^[0-9]{1,4}$") AndAlso playerNumber.Length = 4) = False
             Console.WriteLine("受け取った数値は４桁の整数ではありません")
-            HitAndBlow()
-        End If
+            Console.Write("数字を入力してください：")
+            playerNumber = Console.ReadLine()
+        End While
 
-    End Sub
+        Return playerNumber
+
+    End Function
 
     ''' <summary>
     ''' コンピュータの数字を四桁ランダムに生成します
