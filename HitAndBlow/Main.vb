@@ -19,8 +19,7 @@ Public Module Main
         Dim playerAnswer As String = ""
 
         While (playerAnswer.Equals("y") OrElse playerAnswer.Equals("n")) = False
-            Console.WriteLine("もう一度遊びますか")
-            Console.WriteLine("遊ぶ場合は：[y]・遊ばない場合は：[n]")
+            Console.WriteLine("もう一度プレイしますか？（Y/N）")
             playerAnswer = Console.ReadLine()
         End While
 
