@@ -164,8 +164,28 @@ Public Module Main
     ''' <returns></returns>
     Public Function MakeComputerNumber() As Char()
         Dim random = New System.Random
-        Dim computerNumber As Char() = New Char() {random.Next(10).ToString,
-          random.Next(10).ToString, random.Next(10).ToString, random.Next(10).ToString}
+        '-1はこれから乱数が入るところです。
+        Dim randomNumber As Integer() = {random.Next(10), -1, -1, -1}
+
+        Dim i As Integer = 1
+        While i < 4
+
+            Dim newNumber As Integer = random.Next(10)
+            'randomNumber配列にnewNumberが含まれていなければ中に入る
+            If Not (randomNumber.Contains(newNumber)) Then
+                randomNumber(i) = newNumber
+                i += 1
+            End If
+
+        End While
+        'randomNumberをStringに変換
+        Dim randomNumberString As String = Nothing
+        For j As Integer = 0 To 3
+            randomNumberString &= randomNumber(j).ToString
+        Next
+
+        Dim computerNumber As Char() = randomNumberString.ToCharArray
+
         Return computerNumber
     End Function
 
