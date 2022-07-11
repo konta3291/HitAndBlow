@@ -13,22 +13,9 @@ Imports NUnit.Framework
         <Test()> Public Sub 四桁の数字の中に同じ数字を含まないかテスト()
             Dim hitAndBlowGame As New HitAndBlowGame
             Dim result As Char() = hitAndBlowGame.MakeComputerNumber()
-            Dim numbersThatAreNotDuplicated As Boolean = True
-            Dim notDuplicatNumber As Char() = {result(0), "", "", ""}
-            Dim i As Integer = 1
-            While i < 4
-                Dim newNumber As Char = result(i)
-
-                If Not (notDuplicatNumber.Contains(newNumber)) Then
-                    notDuplicatNumber(i) = newNumber
-                    i += 1
-                Else
-                    numbersThatAreNotDuplicated = False
-                    Exit While
-                End If
-
-            End While
-            Assert.IsTrue(numbersThatAreNotDuplicated)
+            'result配列の要素の中で重複していない要素だけnotDuplicatNumberに入れる
+            Dim notDuplicatNumber As Char() = result.Distinct().ToArray
+            Assert.That(result, [Is].EqualTo(notDuplicatNumber))
 
         End Sub
 
