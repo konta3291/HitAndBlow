@@ -22,12 +22,7 @@ Public Module Main
             Console.WriteLine("もう一度プレイしますか？（Y/N）")
             playerAnswer = Console.ReadLine()
         End While
-
-        If playerAnswer.Equals("y") Then
-            Return True
-        Else
-            Return False
-        End If
+        Return playerAnswer.Equals("y")
     End Function
 
     ''' <summary>
