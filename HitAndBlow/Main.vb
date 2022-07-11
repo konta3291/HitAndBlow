@@ -29,13 +29,15 @@ Public Module Main
     ''' プレイヤーからヒット＆ブローゲームで遊ぶための四桁の整数を受け取る
     ''' </summary>
     Public Function GetPlayerNumber() As String
-        Console.Write("数字を入力してください：")
-        Dim playerNumber As String = Console.ReadLine()
+        Dim playerNumber As String = ""
 
         While Not (Regex.IsMatch(playerNumber, "^[0-9]{1,4}$") AndAlso playerNumber.Length = 4)
-            Console.WriteLine("受け取った数値は４桁の整数ではありません")
             Console.Write("数字を入力してください：")
             playerNumber = Console.ReadLine()
+            If (Regex.IsMatch(playerNumber, "^[0-9]{1,4}$") AndAlso playerNumber.Length = 4) Then
+                Exit While
+            End If
+            Console.WriteLine("受け取った数値は４桁の整数ではありません")
         End While
 
         Return playerNumber
