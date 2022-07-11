@@ -18,11 +18,11 @@ Public Module Main
     Private Function AskPlayerWantToPlayAgain() As Boolean
         Dim playerAnswer As String = ""
 
-        While Not (playerAnswer.Equals("y") OrElse playerAnswer.Equals("n"))
+        While Not (playerAnswer.Equals("Y") OrElse playerAnswer.Equals("N"))
             Console.WriteLine("もう一度プレイしますか？（Y/N）")
             playerAnswer = Console.ReadLine()
         End While
-        Return playerAnswer.Equals("y")
+        Return playerAnswer.Equals("Y")
     End Function
 
     ''' <summary>
