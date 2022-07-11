@@ -6,7 +6,7 @@ Imports NUnit.Framework
             Dim hitAndBlowGame As New HitAndBlowGame
             Dim result As Char() = hitAndBlowGame.MakeComputerNumber()
 
-            Assert.That(IsNumeric(New String(result)), [Is].EqualTo(True))
+            Assert.IsTrue(New String(result))
 
         End Sub
 
@@ -28,7 +28,7 @@ Imports NUnit.Framework
                 End If
 
             End While
-            Assert.That(numbersThatAreNotDuplicated, [Is].EqualTo(True))
+            Assert.IsTrue(numbersThatAreNotDuplicated)
 
         End Sub
 
