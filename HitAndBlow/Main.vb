@@ -5,8 +5,8 @@ Public Module Main
         Dim play As Boolean = True
         While play = True
             Console.WriteLine("ヒット＆ブロー")
-            Dim HitAndBlowGame As New HitAndBlowGame
-            HitAndBlowGame.HitAndBlow()
+            Dim hitAndBlowGame As New HitAndBlowGame
+            hitAndBlowGame.HitAndBlow()
             Console.WriteLine("成功です")
             play = AskPlayerWantToPlayAgain()
         End While
