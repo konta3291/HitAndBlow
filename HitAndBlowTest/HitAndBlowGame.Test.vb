@@ -5,9 +5,8 @@ Imports NUnit.Framework
     <Test()> Public Sub コンピュータの４桁の数字を作るメソッドが数字を返すかテスト()
         Dim HitAndBlowGame As New HitAndBlowGame
         Dim result As Char() = HitAndBlowGame.MakeComputerNumber()
-        Dim resultInteger = Integer.Parse(New String(result))
 
-        Assert.AreEqual(result, result)
+        Assert.That(True, [Is].EqualTo(IsNumeric(New String(result))))
 
     End Sub
 
@@ -29,14 +28,14 @@ Imports NUnit.Framework
             End If
 
         End While
-        Assert.AreEqual(True, numbersThatAreNotDuplicated)
+        Assert.That(True, [Is].EqualTo(numbersThatAreNotDuplicated))
 
     End Sub
 
     <Test()> Public Sub コンピュータの４桁の数字を作るメソッドが４桁で返すかテスト()
         Dim HitAndBlowGame As New HitAndBlowGame
         Dim result As Char() = HitAndBlowGame.MakeComputerNumber()
-        Assert.AreEqual(4, result.Count)
+        Assert.That(4, [Is].EqualTo(result.Count))
 
     End Sub
 
@@ -48,7 +47,8 @@ Imports NUnit.Framework
         Dim resultList As New List(Of Integer)(New Integer() {0, 2, 3})
 
         Dim result As List(Of Integer) = HitAndBlowGame.GetHitIndexs(computerNumber, playerNumber)
-        Assert.AreEqual(resultList, result)
+        Assert.That(resultList, [Is].EqualTo(result))
+
 
     End Sub
 
@@ -60,7 +60,7 @@ Imports NUnit.Framework
         Dim resultList As New List(Of Char)(New Char() {"1"c, "4"c})
 
         Dim result As List(Of Char) = HitAndBlowGame.DeleteHitNumber(number, hitNumberIndex)
-        Assert.AreEqual(resultList, result)
+        Assert.That(resultList, [Is].EqualTo(result))
 
     End Sub
 
@@ -71,7 +71,7 @@ Imports NUnit.Framework
 
 
         Dim result As Integer = HitAndBlowGame.CountNumberOfBlow(computerNumber, playerNumber)
-        Assert.AreEqual(2, result)
+        Assert.That(2, [Is].EqualTo(result))
 
     End Sub
 
@@ -82,7 +82,7 @@ Imports NUnit.Framework
 
 
         Dim result As Integer = HitAndBlowGame.CountNumberOfBlow(computerNumber, playerNumber)
-        Assert.AreEqual(3, result)
+        Assert.That(3, [Is].EqualTo(result))
 
     End Sub
 End Class
