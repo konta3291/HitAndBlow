@@ -6,7 +6,7 @@ Imports NUnit.Framework
         Dim HitAndBlowGame As New HitAndBlowGame
         Dim result As Char() = HitAndBlowGame.MakeComputerNumber()
 
-        Assert.That(True, [Is].EqualTo(IsNumeric(New String(result))))
+        Assert.That(IsNumeric(New String(result)), [Is].EqualTo(True))
 
     End Sub
 
@@ -28,14 +28,14 @@ Imports NUnit.Framework
             End If
 
         End While
-        Assert.That(True, [Is].EqualTo(numbersThatAreNotDuplicated))
+        Assert.That(numbersThatAreNotDuplicated, [Is].EqualTo(True))
 
     End Sub
 
     <Test()> Public Sub コンピュータの４桁の数字を作るメソッドが４桁で返すかテスト()
         Dim HitAndBlowGame As New HitAndBlowGame
         Dim result As Char() = HitAndBlowGame.MakeComputerNumber()
-        Assert.That(4, [Is].EqualTo(result.Count))
+        Assert.That(result.Count, [Is].EqualTo(4))
 
     End Sub
 
@@ -47,7 +47,7 @@ Imports NUnit.Framework
         Dim resultList As New List(Of Integer)(New Integer() {0, 2, 3})
 
         Dim result As List(Of Integer) = HitAndBlowGame.GetHitIndexs(computerNumber, playerNumber)
-        Assert.That(resultList, [Is].EqualTo(result))
+        Assert.That(result, [Is].EqualTo(resultList))
 
 
     End Sub
@@ -60,7 +60,7 @@ Imports NUnit.Framework
         Dim resultList As New List(Of Char)(New Char() {"1"c, "4"c})
 
         Dim result As List(Of Char) = HitAndBlowGame.DeleteHitNumber(number, hitNumberIndex)
-        Assert.That(resultList, [Is].EqualTo(result))
+        Assert.That(result, [Is].EqualTo(resultList))
 
     End Sub
 
@@ -71,7 +71,7 @@ Imports NUnit.Framework
 
 
         Dim result As Integer = HitAndBlowGame.CountNumberOfBlow(computerNumber, playerNumber)
-        Assert.That(2, [Is].EqualTo(result))
+        Assert.That(result, [Is].EqualTo(2))
 
     End Sub
 
@@ -82,7 +82,7 @@ Imports NUnit.Framework
 
 
         Dim result As Integer = HitAndBlowGame.CountNumberOfBlow(computerNumber, playerNumber)
-        Assert.That(3, [Is].EqualTo(result))
+        Assert.That(result, [Is].EqualTo(3))
 
     End Sub
 End Class
