@@ -18,7 +18,7 @@ Public Module Main
     Private Function AskPlayerWantToPlayAgain() As Boolean
         Dim playerAnswer As String = ""
 
-        While (playerAnswer.Equals("y") OrElse playerAnswer.Equals("n")) = False
+        While Not (playerAnswer.Equals("y") OrElse playerAnswer.Equals("n"))
             Console.WriteLine("もう一度プレイしますか？（Y/N）")
             playerAnswer = Console.ReadLine()
         End While
@@ -37,7 +37,7 @@ Public Module Main
         Console.Write("数字を入力してください：")
         Dim playerNumber As String = Console.ReadLine()
 
-        While (Regex.IsMatch(playerNumber, "^[0-9]{1,4}$") AndAlso playerNumber.Length = 4) = False
+        While Not (Regex.IsMatch(playerNumber, "^[0-9]{1,4}$") AndAlso playerNumber.Length = 4)
             Console.WriteLine("受け取った数値は４桁の整数ではありません")
             Console.Write("数字を入力してください：")
             playerNumber = Console.ReadLine()
