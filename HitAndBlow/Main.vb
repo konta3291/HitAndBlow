@@ -32,12 +32,15 @@ Public Module Main
         Dim playerNumber As String = ""
 
         While Not (Regex.IsMatch(playerNumber, "^[0-9]{1,4}$") AndAlso playerNumber.Length = 4)
+            Dim count As Integer
+            If 0 < count Then
+                Console.WriteLine("受け取った数値は４桁の整数ではありません")
+            End If
             Console.Write("数字を入力してください：")
             playerNumber = Console.ReadLine()
-            If (Regex.IsMatch(playerNumber, "^[0-9]{1,4}$") AndAlso playerNumber.Length = 4) Then
-                Exit While
-            End If
-            Console.WriteLine("受け取った数値は４桁の整数ではありません")
+
+            count += 1
+
         End While
 
         Return playerNumber
