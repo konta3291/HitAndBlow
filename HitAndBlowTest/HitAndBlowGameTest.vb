@@ -18,7 +18,7 @@ Imports NUnit.Framework
 
             'result配列の要素の中で重複していない要素だけnotDuplicatNumberに入れる
             Dim notDuplicatNumber As Char() = result.Distinct().ToArray
-            Assert.That(result, [Is].EqualTo(notDuplicatNumber))
+            Assert.That(notDuplicatNumber.Length, [Is].EqualTo(4))
 
         End Sub
 
