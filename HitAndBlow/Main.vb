@@ -44,6 +44,11 @@ Public Module Main
 
     End Function
 
+    ''' <summary>
+    ''' 受け取った数字がヒット＆ブローのゲームに使用することのできる数字か判断する
+    ''' </summary>
+    ''' <param name="number"></param>
+    ''' <returns></returns>
     Public Function IsNumbersAreCorrectForGame(number As String) As Boolean
         Return Regex.IsMatch(number, "^[0-9]{1,4}$") AndAlso number.Length = 4
     End Function
