@@ -34,7 +34,7 @@ Public Module Main
 
             Console.Write("数字を入力してください：")
             Dim playerNumber As String = Console.ReadLine()
-            If Regex.IsMatch(playerNumber, "^[0-9]{1,4}$") AndAlso playerNumber.Length = 4 Then
+            If IsNumbersAreCorrectForGame(playerNumber) Then
                 Return playerNumber
             Else
                 Console.WriteLine("受け取った数値は４桁の整数ではありません")
@@ -42,6 +42,10 @@ Public Module Main
 
         End While
 
+    End Function
+
+    Public Function IsNumbersAreCorrectForGame(number As String) As Boolean
+        Return Regex.IsMatch(number, "^[0-9]{1,4}$") AndAlso number.Length = 4
     End Function
 
     ''' <summary>
