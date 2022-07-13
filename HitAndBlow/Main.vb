@@ -30,16 +30,17 @@ Public Module Main
     ''' </summary>
     Public Function GetPlayerNumber() As String
         Dim playerNumber As String = ""
-
+        Dim firstTime = True
         While Not (Regex.IsMatch(playerNumber, "^[0-9]{1,4}$") AndAlso playerNumber.Length = 4)
-            Dim count As Integer
-            If 0 < count Then
+            If Not firstTime Then
                 Console.WriteLine("受け取った数値は４桁の整数ではありません")
             End If
+
             Console.Write("数字を入力してください：")
             playerNumber = Console.ReadLine()
-
-            count += 1
+            If firstTime Then
+                firstTime = False
+            End If
 
         End While
 
