@@ -1,10 +1,15 @@
 ﻿Imports HitAndBlow
 Imports NUnit.Framework
 <TestFixture> Public MustInherit Class HitAndBlowGameTest
-    Private sut As New HitAndBlowGame
+    Private sut As HitAndBlowGame
+    <SetUp> Public Overridable Sub Setup()
+        sut = New HitAndBlowGame
+    End Sub
+
     Public Class MakeComputerNumberTest : Inherits HitAndBlowGameTest
         Private result As Char()
-        <SetUp> Public Sub MakeComputerNumberのセットアップ()
+        <SetUp> Public Overrides Sub Setup()
+            MyBase.Setup()
             result = sut.MakeComputerNumber()
         End Sub
 
