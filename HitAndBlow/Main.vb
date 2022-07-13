@@ -2,12 +2,12 @@
 Public Module Main
 
     Sub Main()
+        Console.WriteLine("ヒット＆ブロー")
         Dim isPlayerWantsToPlay As Boolean = True
         While isPlayerWantsToPlay = True
-            Console.WriteLine("ヒット＆ブロー")
             Dim hitAndBlowGame As New HitAndBlowGame
             hitAndBlowGame.HitAndBlow()
-            Console.WriteLine("成功です")
+            Console.WriteLine("正解です！ゲームクリア！")
             isPlayerWantsToPlay = AskPlayerWantToPlayAgain()
         End While
     End Sub
@@ -59,7 +59,7 @@ Public Module Main
     ''' <param name="hit"></param>
     ''' <param name="blow"></param>
     Public Sub ShowHitAndBlowResult(hit As Integer, blow As Integer)
-        Dim result = $"Hit:{hit},Blow:{blow}"
+        Dim result = $"ヒット:{hit}　ブロー:{blow}"
         Console.WriteLine(result)
     End Sub
 
