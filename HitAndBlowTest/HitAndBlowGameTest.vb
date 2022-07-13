@@ -10,7 +10,7 @@ Imports NUnit.Framework
 
         <Test()> Public Sub 数字を返すかテスト()
 
-            Assert.IsTrue(New String(result))
+            Assert.IsTrue(IsNumeric(New String(result)))
 
         End Sub
 
