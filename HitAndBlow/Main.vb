@@ -3,13 +3,11 @@ Public Module Main
 
     Sub Main()
         Console.WriteLine("ヒット＆ブロー")
-        Dim isPlayerWantsToPlay As Boolean = True
-        While isPlayerWantsToPlay = True
+        Do
             Dim hitAndBlowGame As New HitAndBlowGame
             hitAndBlowGame.HitAndBlow()
             Console.WriteLine("正解です！ゲームクリア！")
-            isPlayerWantsToPlay = AskPlayerWantToPlayAgain()
-        End While
+        Loop While AskPlayerWantToPlayAgain()
     End Sub
 
     ''' <summary>
