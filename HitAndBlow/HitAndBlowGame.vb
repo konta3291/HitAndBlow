@@ -1,6 +1,34 @@
 ﻿Public Class HitAndBlowGame
 
     ''' <summary>
+    ''' ヒット＆ブローの処理をする
+    ''' </summary>
+    Public Function HitAndBlow(playerAnswer As String) As String
+        Dim hit As Integer = 0
+        Dim computerNumber As New List(Of Char)({"1"c, "2"c, "3"c, "4"c})
+        Dim playerNumber As New List(Of Char)(playerAnswer.ToCharArray)
+        Dim blow As Integer = 0
+
+        hit = CountNumberOfHit(computerNumber, playerNumber)
+
+        If hit < 4 Then
+
+            'hitした数字はblowでは比較しないので削除します。hitの位置を記録します
+            Dim hitIndexs As New List(Of Integer)(GetHitIndexs(computerNumber, playerNumber))
+            '反転させ数字の大きい方を先頭にします
+            hitIndexs.Reverse()
+            computerNumber = DeleteHitNumber(computerNumber, hitIndexs)
+            playerNumber = DeleteHitNumber(playerNumber, hitIndexs)
+            blow = CountNumberOfBlow(computerNumber, playerNumber)
+
+        End If
+
+        Dim result = $"ヒット:{hit}　ブロー:{blow}"
+        Return result
+
+    End Function
+
+    ''' <summary>
     ''' 受け取った2つのリストを比較し、位置と数字が同じものがいくつあったかカウントしその値を返す
     ''' </summary>
     ''' <param name="computerNumber"></param>
@@ -40,6 +68,41 @@
         Next
 
         Return blow
+
+    End Function
+
+    ''' <summary>
+    ''' ヒットだった数字を消したリストを返す
+    ''' </summary>
+    ''' <param name="number"></param>
+    ''' <param name="hitIndexs"></param>
+    ''' <returns></returns>
+    Public Function DeleteHitNumber(number As List(Of Char), hitIndexs As List(Of Integer)) As List(Of Char)
+        Dim returnNumber As New List(Of Char)(number)
+
+        For Each deleteIndex As Integer In hitIndexs
+            returnNumber.RemoveAt(deleteIndex)
+        Next
+
+        Return returnNumber
+
+    End Function
+
+    ''' <summary>
+    ''' 2つのリストを比較し数字が同じだった場所を返す
+    ''' </summary>
+    ''' <param name="computerNumber"></param>
+    ''' <param name="playerNumber"></param>
+    ''' <returns></returns>
+    Public Function GetHitIndexs(computerNumber As List(Of Char), playerNumber As List(Of Char)) As List(Of Integer)
+        Dim hitIndexs As New List(Of Integer)
+
+        For i As Integer = 0 To computerNumber.Count - 1
+            If computerNumber(i) = playerNumber(i) Then
+                hitIndexs.Add(i)
+            End If
+        Next
+        Return hitIndexs
 
     End Function
 
