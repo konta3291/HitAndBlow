@@ -6,6 +6,35 @@ Imports NUnit.Framework
         sut = New HitAndBlowGame
     End Sub
 
+    Public Class MakeComputerNumberTest : Inherits HitAndBlowGameTest
+        Private result As Char()
+        <SetUp> Public Overrides Sub Setup()
+            MyBase.Setup()
+            result = sut.MakeComputerNumber()
+        End Sub
+
+        <Test()> Public Sub 数字を返すかテスト()
+
+            Assert.IsTrue(IsNumeric(New String(result)))
+
+        End Sub
+
+        <Test()> Public Sub 四桁の数字の中に同じ数字を含まないかテスト()
+
+            'result配列の要素の中で重複していない要素だけnotDuplicatNumberに入れる
+            Dim notDuplicatNumber As Char() = result.Distinct().ToArray
+            Assert.That(notDuplicatNumber.Length, [Is].EqualTo(4))
+
+        End Sub
+
+        <Test()> Public Sub 四桁で返すかテスト()
+
+            Assert.That(result.Count, [Is].EqualTo(4))
+
+        End Sub
+
+    End Class
+
     Public Class CountNumberOfHitTest : Inherits HitAndBlowGameTest
         <Test()> Public Sub ヒット数を返すメソッドのテスト()
             Dim playerNumber As New List(Of Char)(New Char() {"1"c, "5"c, "3"c, "0"c})

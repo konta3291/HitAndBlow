@@ -5,7 +5,7 @@
     ''' </summary>
     Public Sub HitAndBlow()
         Dim hit As Integer = 0
-        Dim computerAnswer As New List(Of Char)({"1"c, "2"c, "3"c, "4"c})
+        Dim computerAnswer As New List(Of Char)(MakeComputerNumber)
         While hit <> 4
             Dim computerNumber As New List(Of Char)(computerAnswer)
             Dim playerNumber As New List(Of Char)(Main.GetPlayerNumber.ToCharArray)
@@ -106,6 +106,38 @@
             End If
         Next
         Return hitIndexs
+
+    End Function
+
+    ''' <summary>
+    ''' コンピュータの数字を四桁ランダムに生成します
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function MakeComputerNumber() As Char()
+        Dim random = New System.Random
+        '-1はこれから乱数が入るところです。
+        Dim randomNumber As Integer() = {random.Next(10), -1, -1, -1}
+
+        Dim i As Integer = 1
+        While i < 4
+
+            Dim newNumber As Integer = random.Next(10)
+            'randomNumber配列にnewNumberが含まれていなければ中に入る
+            If Not (randomNumber.Contains(newNumber)) Then
+                randomNumber(i) = newNumber
+                i += 1
+            End If
+
+        End While
+        'randomNumberをStringに変換
+        Dim randomNumberString As String = Nothing
+        For j As Integer = 0 To 3
+            randomNumberString &= randomNumber(j).ToString
+        Next
+
+        Dim computerNumber As Char() = randomNumberString.ToCharArray
+
+        Return computerNumber
 
     End Function
 
