@@ -3,30 +3,33 @@
     ''' <summary>
     ''' ヒット＆ブローの処理をする
     ''' </summary>
-    Public Function HitAndBlow(playerAnswer As String) As String
+    Public Sub HitAndBlow()
         Dim hit As Integer = 0
-        Dim computerNumber As New List(Of Char)({"1"c, "2"c, "3"c, "4"c})
-        Dim playerNumber As New List(Of Char)(playerAnswer.ToCharArray)
-        Dim blow As Integer = 0
+        Dim computerAnswer As New List(Of Char)({"1"c, "2"c, "3"c, "4"c})
+        While hit <> 4
+            Dim computerNumber As New List(Of Char)(computerAnswer)
+            Dim playerNumber As New List(Of Char)(Main.GetPlayerNumber.ToCharArray)
+            Dim blow As Integer = 0
 
-        hit = CountNumberOfHit(computerNumber, playerNumber)
+            hit = CountNumberOfHit(computerNumber, playerNumber)
 
-        If hit < 4 Then
+            If hit < 4 Then
 
-            'hitした数字はblowでは比較しないので削除します。hitの位置を記録します
-            Dim hitIndexs As New List(Of Integer)(GetHitIndexs(computerNumber, playerNumber))
-            '反転させ数字の大きい方を先頭にします
-            hitIndexs.Reverse()
-            computerNumber = DeleteHitNumber(computerNumber, hitIndexs)
-            playerNumber = DeleteHitNumber(playerNumber, hitIndexs)
-            blow = CountNumberOfBlow(computerNumber, playerNumber)
+                'hitした数字はblowでは比較しないので削除します。hitの位置を記録します
+                Dim hitIndexs As New List(Of Integer)(GetHitIndexs(computerNumber, playerNumber))
+                '反転させ数字の大きい方を先頭にします
+                hitIndexs.Reverse()
+                computerNumber = DeleteHitNumber(computerNumber, hitIndexs)
+                playerNumber = DeleteHitNumber(playerNumber, hitIndexs)
+                blow = CountNumberOfBlow(computerNumber, playerNumber)
 
-        End If
+            End If
 
-        Dim result = $"ヒット:{hit}　ブロー:{blow}"
-        Return result
+            Main.ShowHitAndBlowResult(hit, blow)
 
-    End Function
+        End While
+
+    End Sub
 
     ''' <summary>
     ''' 受け取った2つのリストを比較し、位置と数字が同じものがいくつあったかカウントしその値を返す

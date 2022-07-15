@@ -57,38 +57,4 @@ Imports NUnit.Framework
         End Sub
     End Class
 
-    Public Class HitAndBlowTest : Inherits HitAndBlowGameTest
-        <Test()> Public Sub ヒット4ブロー0()
-            Dim playerNumber As String = "1234"
-            Dim result As String = sut.HitAndBlow(playerNumber)
-
-            Assert.That(result, [Is].EqualTo("ヒット:4　ブロー:0"))
-
-        End Sub
-
-        <Test()> Public Sub ヒット0ブロー4()
-            Dim playerNumber As String = "4321"
-            Dim result As String = sut.HitAndBlow(playerNumber)
-
-            Assert.That(result, [Is].EqualTo("ヒット:0　ブロー:4"))
-
-        End Sub
-
-        <Test()> Public Sub ヒット2ブロー2()
-            Dim playerNumber As String = "1243"
-            Dim result As String = sut.HitAndBlow(playerNumber)
-
-            Assert.That(result, [Is].EqualTo("ヒット:2　ブロー:2"))
-
-        End Sub
-
-        <Test()> Public Sub ヒット0ブロー0()
-            Dim playerNumber As String = "5678"
-            Dim result As String = sut.HitAndBlow(playerNumber)
-
-            Assert.That(result, [Is].EqualTo("ヒット:0　ブロー:0"))
-
-        End Sub
-    End Class
-
 End Class

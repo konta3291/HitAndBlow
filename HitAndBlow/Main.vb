@@ -4,7 +4,8 @@ Public Module Main
     Sub Main()
         Console.WriteLine("ヒット＆ブロー")
         Dim hitAndBlowGame As New HitAndBlowGame
-        Console.WriteLine(hitAndBlowGame.HitAndBlow(GetPlayerNumber))
+        hitAndBlowGame.HitAndBlow()
+        Console.WriteLine("正解です！ゲームクリア！")
     End Sub
 
     ''' <summary>
@@ -34,5 +35,15 @@ Public Module Main
     Public Function IsNumbersAreCorrectForGame(number As String) As Boolean
         Return Regex.IsMatch(number, "^[0-9]{1,4}$") AndAlso number.Length = 4
     End Function
+
+    ''' <summary>
+    ''' ヒット＆ブローの結果を表示する
+    ''' </summary>
+    ''' <param name="hit"></param>
+    ''' <param name="blow"></param>
+    Public Sub ShowHitAndBlowResult(hit As Integer, blow As Integer)
+        Dim result = $"ヒット:{hit}　ブロー:{blow}"
+        Console.WriteLine(result)
+    End Sub
 
 End Module
