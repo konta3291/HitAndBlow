@@ -3,9 +3,9 @@
     ''' <summary>
     ''' ヒット＆ブローの処理をする
     ''' </summary>
-    Public Sub HitAndBlow()
+    Public Sub HitAndBlow(computerAnswer As List(Of Char))
         Dim hit As Integer = 0
-        Dim computerAnswer As New List(Of Char)(MakeComputerNumber)
+
         While hit <> 4
             Dim computerNumber As New List(Of Char)(computerAnswer)
             Dim playerNumber As New List(Of Char)(Main.GetPlayerNumber.ToCharArray)
