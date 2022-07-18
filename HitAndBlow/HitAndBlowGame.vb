@@ -10,29 +10,29 @@ Public Class HitAndBlowGame
         While hit <> 4
             Dim computerNumber As New List(Of Char)(computerAnswer)
             Dim playerAnswer As String = GetPlayerAnswer()
-            If Not "ShowAnswer".Equals(playerAnswer) Then
-                Dim playerNumber As New List(Of Char)(playerAnswer.ToCharArray)
-                Dim blow As Integer = 0
-
-                hit = CountNumberOfHit(computerNumber, playerNumber)
-
-                If hit < 4 Then
-
-                    'hitした数字はblowでは比較しないので削除します。hitの位置を記録します
-                    Dim hitIndexs As New List(Of Integer)(GetHitIndexs(computerNumber, playerNumber))
-                    '反転させ数字の大きい方を先頭にします
-                    hitIndexs.Reverse()
-                    computerNumber = DeleteHitNumber(computerNumber, hitIndexs)
-                    playerNumber = DeleteHitNumber(playerNumber, hitIndexs)
-                    blow = CountNumberOfBlow(computerNumber, playerNumber)
-
-                End If
-
-                ShowHitAndBlowResult(hit, blow)
-            Else
-
+            If "ShowAnswer".Equals(playerAnswer) Then
                 ShowAnswer(computerAnswer)
+                Continue While
             End If
+            Dim playerNumber As New List(Of Char)(playerAnswer.ToCharArray)
+            Dim blow As Integer = 0
+
+            hit = CountNumberOfHit(computerNumber, playerNumber)
+
+            If hit < 4 Then
+
+                'hitした数字はblowでは比較しないので削除します。hitの位置を記録します
+                Dim hitIndexs As New List(Of Integer)(GetHitIndexs(computerNumber, playerNumber))
+                '反転させ数字の大きい方を先頭にします
+                hitIndexs.Reverse()
+                computerNumber = DeleteHitNumber(computerNumber, hitIndexs)
+                playerNumber = DeleteHitNumber(playerNumber, hitIndexs)
+                blow = CountNumberOfBlow(computerNumber, playerNumber)
+
+            End If
+
+            ShowHitAndBlowResult(hit, blow)
+
         End While
 
     End Sub
