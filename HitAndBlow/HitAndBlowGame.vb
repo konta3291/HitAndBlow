@@ -1,4 +1,5 @@
-﻿Public Class HitAndBlowGame
+﻿Imports System.Text.RegularExpressions
+Public Class HitAndBlowGame
 
     ''' <summary>
     ''' ヒット＆ブローの処理をする
@@ -8,7 +9,7 @@
         Dim computerAnswer As Char() = MakeComputerNumber()
         While hit <> 4
             Dim computerNumber As New List(Of Char)(computerAnswer)
-            Dim playerAnswer As String = Main.GetPlayerAnswer
+            Dim playerAnswer As String = GetPlayerAnswer()
             If Not "ShowAnswer".Equals(playerAnswer) Then
                 Dim playerNumber As New List(Of Char)(playerAnswer.ToCharArray)
                 Dim blow As Integer = 0
@@ -27,10 +28,10 @@
 
                 End If
 
-                Main.ShowHitAndBlowResult(hit, blow)
+                ShowHitAndBlowResult(hit, blow)
             Else
 
-                Main.ShowAnswer(computerAnswer)
+                ShowAnswer(computerAnswer)
             End If
         End While
 
@@ -145,6 +146,55 @@
 
         Return computerNumber
 
+    End Function
+
+    ''' <summary>
+    ''' ヒット＆ブローの結果を表示する
+    ''' </summary>
+    ''' <param name="hit"></param>
+    ''' <param name="blow"></param>
+    Private Sub ShowHitAndBlowResult(hit As Integer, blow As Integer)
+        Dim result = $"ヒット:{hit}　ブロー:{blow}"
+        Console.WriteLine(result)
+    End Sub
+
+    ''' <summary>
+    ''' 答えを表示する
+    ''' </summary>
+    Private Sub ShowAnswer(computerAnswer As Char())
+
+        Console.WriteLine(computerAnswer)
+
+    End Sub
+
+    ''' <summary>
+    ''' プレイヤーから適切な入力がされるまで数字の入力を求める
+    ''' 適切な入力とは、4桁の整数もしくは、ShowAnswer
+    ''' </summary>
+    Private Function GetPlayerAnswer() As String
+
+        While True
+
+            Console.Write("数字を入力してください：")
+            Dim playerNumber As String = Console.ReadLine()
+
+            If "ShowAnswer".Equals(playerNumber) OrElse IsNumbersAreCorrectForGame(playerNumber) Then
+                Return playerNumber
+            Else
+                Console.WriteLine("受け取った数値は４桁の整数ではありません")
+            End If
+
+        End While
+
+    End Function
+
+    ''' <summary>
+    ''' 受け取った数字がヒット＆ブローのゲームに使用することのできる数字か判断する
+    ''' </summary>
+    ''' <param name="number"></param>
+    ''' <returns></returns>
+    Public Function IsNumbersAreCorrectForGame(number As String) As Boolean
+        Return Regex.IsMatch(number, "^[0-9]{1,4}$") AndAlso number.Length = 4
     End Function
 
 End Class
