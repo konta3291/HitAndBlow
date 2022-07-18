@@ -47,12 +47,10 @@ Public Module Main
     ''' <summary>
     ''' 答えを表示する
     ''' </summary>
-    Public Sub ShowAnswer(computerAnswer As List(Of Char))
+    Public Sub ShowAnswer(computerAnswer As Char())
 
-        For Each number As Char In computerAnswer
-            Console.Write(number)
-        Next
-        Console.WriteLine()
+        Console.WriteLine(computerAnswer)
+
     End Sub
 
     ''' <summary>

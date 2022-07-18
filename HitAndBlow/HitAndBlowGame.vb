@@ -5,7 +5,7 @@
     ''' </summary>
     Public Sub HitAndBlow()
         Dim hit As Integer = 0
-        Dim computerAnswer As New List(Of Char)(MakeComputerNumber)
+        Dim computerAnswer As Char() = MakeComputerNumber()
         While hit <> 4
             Dim computerNumber As New List(Of Char)(computerAnswer)
             Dim playerAnswer As String = Main.GetPlayerAnswer
