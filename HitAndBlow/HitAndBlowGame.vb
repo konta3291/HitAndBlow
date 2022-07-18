@@ -115,8 +115,9 @@
     ''' <returns></returns>
     Public Function MakeComputerNumber() As Char()
         Dim random = New System.Random
-        '-1はこれから乱数が入るところです。
-        Dim randomNumber As Integer() = {random.Next(10), -1, -1, -1}
+        Const RANDOM_NUMBER_WILL_BE_ENTERED As Integer = -1
+        Dim randomNumber As Integer() = {random.Next(10), RANDOM_NUMBER_WILL_BE_ENTERED,
+            RANDOM_NUMBER_WILL_BE_ENTERED, RANDOM_NUMBER_WILL_BE_ENTERED}
 
         Dim i As Integer = 1
         While i < 4
