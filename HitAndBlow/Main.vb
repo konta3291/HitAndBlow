@@ -1,12 +1,11 @@
 ﻿Imports System.Text.RegularExpressions
 Public Module Main
-    Private computerAnswer As New List(Of Char)
+
     Sub Main()
         Console.WriteLine("ヒット＆ブロー")
         Do
             Dim hitAndBlowGame As New HitAndBlowGame
-            computerAnswer = New List(Of Char)(hitAndBlowGame.MakeComputerNumber)
-            hitAndBlowGame.HitAndBlow(computerAnswer)
+            hitAndBlowGame.HitAndBlow()
             Console.WriteLine("正解です！ゲームクリア！")
         Loop While AskPlayerWantToPlayAgain()
     End Sub
@@ -25,19 +24,17 @@ Public Module Main
     End Function
 
     ''' <summary>
-    ''' プレイヤーからヒット＆ブローゲームで遊ぶための四桁の整数を受け取る
-    ''' ShowAnswerと入力されると答えを表示するメソッドを呼び出す
+    ''' プレイヤーから適切な入力がされるまで数字の入力を求める
+    ''' 適切な入力とは、4桁の整数もしくは、ShowAnswer
     ''' </summary>
-    Public Function GetPlayerNumber() As String
+    Public Function GetPlayerAnswer() As String
 
         While True
 
             Console.Write("数字を入力してください：")
             Dim playerNumber As String = Console.ReadLine()
 
-            If "ShowAnswer".Equals(playerNumber) Then
-                ShowAnswer()
-            ElseIf IsNumbersAreCorrectForGame(playerNumber) Then
+            If "ShowAnswer".Equals(playerNumber) OrElse IsNumbersAreCorrectForGame(playerNumber) Then
                 Return playerNumber
             Else
                 Console.WriteLine("受け取った数値は４桁の整数ではありません")
@@ -50,7 +47,7 @@ Public Module Main
     ''' <summary>
     ''' 答えを表示する
     ''' </summary>
-    Private Sub ShowAnswer()
+    Public Sub ShowAnswer(computerAnswer As List(Of Char))
 
         For Each number As Char In computerAnswer
             Console.Write(number)

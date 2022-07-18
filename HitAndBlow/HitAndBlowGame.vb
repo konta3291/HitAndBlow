@@ -3,30 +3,35 @@
     ''' <summary>
     ''' ヒット＆ブローの処理をする
     ''' </summary>
-    Public Sub HitAndBlow(computerAnswer As List(Of Char))
+    Public Sub HitAndBlow()
         Dim hit As Integer = 0
-
+        Dim computerAnswer As New List(Of Char)(MakeComputerNumber)
         While hit <> 4
             Dim computerNumber As New List(Of Char)(computerAnswer)
-            Dim playerNumber As New List(Of Char)(Main.GetPlayerNumber.ToCharArray)
-            Dim blow As Integer = 0
+            Dim playerAnswer As String = Main.GetPlayerAnswer
+            If Not "ShowAnswer".Equals(playerAnswer) Then
+                Dim playerNumber As New List(Of Char)(playerAnswer.ToCharArray)
+                Dim blow As Integer = 0
 
-            hit = CountNumberOfHit(computerNumber, playerNumber)
+                hit = CountNumberOfHit(computerNumber, playerNumber)
 
-            If hit < 4 Then
+                If hit < 4 Then
 
-                'hitした数字はblowでは比較しないので削除します。hitの位置を記録します
-                Dim hitIndexs As New List(Of Integer)(GetHitIndexs(computerNumber, playerNumber))
-                '反転させ数字の大きい方を先頭にします
-                hitIndexs.Reverse()
-                computerNumber = DeleteHitNumber(computerNumber, hitIndexs)
-                playerNumber = DeleteHitNumber(playerNumber, hitIndexs)
-                blow = CountNumberOfBlow(computerNumber, playerNumber)
+                    'hitした数字はblowでは比較しないので削除します。hitの位置を記録します
+                    Dim hitIndexs As New List(Of Integer)(GetHitIndexs(computerNumber, playerNumber))
+                    '反転させ数字の大きい方を先頭にします
+                    hitIndexs.Reverse()
+                    computerNumber = DeleteHitNumber(computerNumber, hitIndexs)
+                    playerNumber = DeleteHitNumber(playerNumber, hitIndexs)
+                    blow = CountNumberOfBlow(computerNumber, playerNumber)
 
+                End If
+
+                Main.ShowHitAndBlowResult(hit, blow)
+            Else
+
+                Main.ShowAnswer(computerAnswer)
             End If
-
-            Main.ShowHitAndBlowResult(hit, blow)
-
         End While
 
     End Sub
