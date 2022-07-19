@@ -6,7 +6,7 @@ Public Module Main
         Do
             Dim hitAndBlowGame As New HitAndBlowGame
             hitAndBlowGame.HitAndBlow()
-            Console.WriteLine("正解です！ゲームクリア！")
+
         Loop While AskPlayerWantToPlayAgain()
     End Sub
 
@@ -32,7 +32,7 @@ Public Module Main
 
             Console.Write("数字を入力してください：")
             Dim playerNumber As String = Console.ReadLine()
-            If IsNumbersAreCorrectForGame(playerNumber) Then
+            If IsNumbersAreCorrectForGame(playerNumber) OrElse "giveup".Equals(playerNumber, StringComparison.OrdinalIgnoreCase) Then
                 Return playerNumber
             Else
                 Console.WriteLine("受け取った数値は４桁の整数ではありません")

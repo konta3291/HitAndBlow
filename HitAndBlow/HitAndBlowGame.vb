@@ -5,10 +5,15 @@
     ''' </summary>
     Public Sub HitAndBlow()
         Dim hit As Integer = 0
-        Dim computerAnswer As New List(Of Char)(MakeComputerNumber)
+        Dim computerAnswer As Char() = MakeComputerNumber()
         While hit <> 4
             Dim computerNumber As New List(Of Char)(computerAnswer)
-            Dim playerNumber As New List(Of Char)(Main.GetPlayerNumber.ToCharArray)
+            Dim playerAnswer As String = Main.GetPlayerNumber
+            If "giveup".Equals(playerAnswer, StringComparison.OrdinalIgnoreCase) Then
+                AbandonTheGame(computerAnswer)
+                Exit Sub
+            End If
+            Dim playerNumber As New List(Of Char)(playerAnswer.ToCharArray)
             Dim blow As Integer = 0
 
             hit = CountNumberOfHit(computerNumber, playerNumber)
@@ -28,7 +33,15 @@
             Main.ShowHitAndBlowResult(hit, blow)
 
         End While
+        Console.WriteLine("正解です！ゲームクリア！")
+    End Sub
 
+    ''' <summary>
+    ''' ギブアップしたときの処理
+    ''' </summary>
+    ''' <param name="answer"></param>
+    Private Sub AbandonTheGame(answer As Char())
+        Console.WriteLine("ギブアップしました。正解は「" & answer & "」でした。")
     End Sub
 
     ''' <summary>
