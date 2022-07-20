@@ -6,7 +6,6 @@ Public Module Main
         Do
             Dim hitAndBlowGame As New HitAndBlowGame
             hitAndBlowGame.HitAndBlow()
-            Console.WriteLine("正解です！ゲームクリア！")
         Loop While AskPlayerWantToPlayAgain()
     End Sub
 
