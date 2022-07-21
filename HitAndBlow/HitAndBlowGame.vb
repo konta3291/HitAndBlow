@@ -189,10 +189,10 @@ Public Class HitAndBlowGame
         While True
 
             Console.Write("数字を入力してください：")
-            Dim playerNumber As String = Console.ReadLine()
+            Dim playerInput As String = Console.ReadLine()
 
-            If "ShowAnswer".Equals(playerNumber) OrElse IsNumbersAreCorrectForGame(playerNumber) OrElse "giveup".Equals(playerNumber, StringComparison.OrdinalIgnoreCase) Then
-                Return playerNumber
+            If IsPlayerInputIsCorrect(playerInput) Then
+                Return playerInput
             Else
                 Console.WriteLine("受け取った数値は４桁の整数ではありません")
             End If
@@ -202,12 +202,14 @@ Public Class HitAndBlowGame
     End Function
 
     ''' <summary>
-    ''' 受け取った数字がヒット＆ブローのゲームに使用することのできる数字か判断する
+    ''' ゲームが受け付ける入力かを判断する
     ''' </summary>
-    ''' <param name="number"></param>
+    ''' <param name="playerInput"></param>
     ''' <returns></returns>
-    Public Function IsNumbersAreCorrectForGame(number As String) As Boolean
-        Return Regex.IsMatch(number, "^[0-9]{1,4}$") AndAlso number.Length = 4
+    Public Function IsPlayerInputIsCorrect(playerInput As String) As Boolean
+        Return (Regex.IsMatch(playerInput, "^[0-9]{1,4}$") AndAlso playerInput.Length = 4) OrElse
+            "giveup".Equals(playerInput, StringComparison.OrdinalIgnoreCase) OrElse
+            "ShowAnswer".Equals(playerInput)
     End Function
 
     ''' <summary>
