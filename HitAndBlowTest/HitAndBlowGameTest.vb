@@ -86,4 +86,37 @@ Imports NUnit.Framework
         End Sub
     End Class
 
+    Public Class IsNumbersAreCorrectForGameTest : Inherits HitAndBlowGameTest
+        <Test()> Public Sub 四桁の数字を渡したときはTrue()
+
+            Assert.IsTrue(sut.IsNumbersAreCorrectForGame("0000"))
+
+        End Sub
+
+        <Test()> Public Sub 四桁ではない五桁の数字を渡したときはFalse()
+
+            Assert.IsFalse(sut.IsNumbersAreCorrectForGame("00000"))
+
+        End Sub
+
+        <Test()> Public Sub 四桁の数字ではない空文字を渡したときはFalse()
+
+            Assert.IsFalse(sut.IsNumbersAreCorrectForGame(""))
+
+        End Sub
+
+        <Test()> Public Sub 数字以外の文字を含むときはFalse()
+
+            Assert.IsFalse(sut.IsNumbersAreCorrectForGame("1.56"))
+
+        End Sub
+
+        <Test()> Public Sub 数字以外の文字を渡したときはFalse()
+
+            Assert.IsFalse(sut.IsNumbersAreCorrectForGame("aaaa"))
+
+        End Sub
+
+    End Class
+
 End Class
