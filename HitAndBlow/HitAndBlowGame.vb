@@ -6,11 +6,12 @@
     Public Sub HitAndBlow()
         Dim hit As Integer = 0
         Dim computerAnswer As New List(Of Char)(MakeComputerNumber)
+        Dim turnCount As Integer = 0
         While hit <> 4
             Dim computerNumber As New List(Of Char)(computerAnswer)
             Dim playerNumber As New List(Of Char)(Main.GetPlayerNumber.ToCharArray)
             Dim blow As Integer = 0
-
+            turnCount += 1
             hit = CountNumberOfHit(computerNumber, playerNumber)
 
             If hit < 4 Then
@@ -22,13 +23,14 @@
                 computerNumber = DeleteHitNumber(computerNumber, hitIndexs)
                 playerNumber = DeleteHitNumber(playerNumber, hitIndexs)
                 blow = CountNumberOfBlow(computerNumber, playerNumber)
+                Main.ShowHitAndBlowResult(hit, blow)
 
+            Else
+                Exit While
             End If
 
-            Main.ShowHitAndBlowResult(hit, blow)
-
         End While
-
+        ShowTheScreenOfGamePassed(turnCount)
     End Sub
 
     ''' <summary>
@@ -141,5 +143,14 @@
         Return computerNumber
 
     End Function
+
+    ''' <summary>
+    ''' ゲームクリアの画面を表示する
+    ''' </summary>
+    ''' <param name="turn"></param>
+    Private Sub ShowTheScreenOfGamePassed(turn As Integer)
+        Console.WriteLine("正解です！ゲームクリア！")
+        Console.WriteLine("正解まで" & turn & "手")
+    End Sub
 
 End Class
