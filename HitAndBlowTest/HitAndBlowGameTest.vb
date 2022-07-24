@@ -86,34 +86,64 @@ Imports NUnit.Framework
         End Sub
     End Class
 
-    Public Class IsNumbersAreCorrectForGameTest : Inherits HitAndBlowGameTest
+    Public Class IsPlayerInputIsCorrectTest : Inherits HitAndBlowGameTest
         <Test()> Public Sub 四桁の数字を渡したときはTrue()
 
-            Assert.IsTrue(sut.IsNumbersAreCorrectForGame("0000"))
+            Assert.IsTrue(sut.IsPlayerInputIsCorrect("0000"))
 
         End Sub
 
         <Test()> Public Sub 四桁ではない五桁の数字を渡したときはFalse()
 
-            Assert.IsFalse(sut.IsNumbersAreCorrectForGame("00000"))
+            Assert.IsFalse(sut.IsPlayerInputIsCorrect("00000"))
 
         End Sub
 
         <Test()> Public Sub 四桁の数字ではない空文字を渡したときはFalse()
 
-            Assert.IsFalse(sut.IsNumbersAreCorrectForGame(""))
+            Assert.IsFalse(sut.IsPlayerInputIsCorrect(""))
 
         End Sub
 
         <Test()> Public Sub 数字以外の文字を含むときはFalse()
 
-            Assert.IsFalse(sut.IsNumbersAreCorrectForGame("1.56"))
+            Assert.IsFalse(sut.IsPlayerInputIsCorrect("1.56"))
 
         End Sub
 
         <Test()> Public Sub 数字以外の文字を渡したときはFalse()
 
-            Assert.IsFalse(sut.IsNumbersAreCorrectForGame("aaaa"))
+            Assert.IsFalse(sut.IsPlayerInputIsCorrect("aaaa"))
+
+        End Sub
+
+        <Test()> Public Sub ShowAnswerを正しく渡すとTrue()
+
+            Assert.IsTrue(sut.IsPlayerInputIsCorrect("ShowAnswer"))
+
+        End Sub
+
+        <Test()> Public Sub ShowAnswerを大文字で渡したときはFalse()
+
+            Assert.IsFalse(sut.IsPlayerInputIsCorrect("SHOWANSWER"))
+
+        End Sub
+
+        <Test()> Public Sub ShowAnswerを小文字で渡したときはFalse()
+
+            Assert.IsFalse(sut.IsPlayerInputIsCorrect("showanswer"))
+
+        End Sub
+
+        <Test()> Public Sub giveupを渡すとTrue()
+
+            Assert.IsTrue(sut.IsPlayerInputIsCorrect("giveup"))
+
+        End Sub
+
+        <Test()> Public Sub giveupを大文字小文字混合で渡すとTrue()
+
+            Assert.IsTrue(sut.IsPlayerInputIsCorrect("GiVeUP"))
 
         End Sub
 
