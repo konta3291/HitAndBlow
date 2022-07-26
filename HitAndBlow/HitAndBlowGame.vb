@@ -194,7 +194,7 @@ Public Class HitAndBlowGame
             If IsPlayerInputIsCorrect(playerInput) Then
                 Return playerInput
             Else
-                Console.WriteLine("受け取った数値は４桁の整数ではありません")
+                Console.WriteLine("入力された数字は４桁の整数ではありません")
             End If
 
         End While
