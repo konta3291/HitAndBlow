@@ -182,7 +182,7 @@ Public Class HitAndBlowGame
 
     ''' <summary>
     ''' プレイヤーから適切な入力がされるまで数字の入力を求める
-    ''' 適切な入力とは、4桁の整数もしくは、ShowAnswer
+    ''' 適切な入力とは、4桁の整数もしくは、ShowAnswer、giveup
     ''' </summary>
     Private Function GetPlayerAnswer() As String
 
