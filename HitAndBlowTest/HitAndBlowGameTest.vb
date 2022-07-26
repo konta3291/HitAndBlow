@@ -10,7 +10,7 @@ Imports NUnit.Framework
         Private result As Char()
         <SetUp> Public Overrides Sub Setup()
             MyBase.Setup()
-            result = sut.MakeComputerNumber()
+            result = sut.MakeComputerNumber(4)
         End Sub
 
         <Test()> Public Sub 数字を返すかテスト()
@@ -87,63 +87,51 @@ Imports NUnit.Framework
     End Class
 
     Public Class IsPlayerInputIsCorrectTest : Inherits HitAndBlowGameTest
-        <Test()> Public Sub 四桁の数字を渡したときはTrue()
+        <TestCase("0000", 4)>
+        <TestCase("00000", 5)>
+        Public Sub 指定桁の数字を渡したときはTrue(inputNumber As String, numberOfDigits As Integer)
 
-            Assert.IsTrue(sut.IsPlayerInputIsCorrect("0000"))
-
-        End Sub
-
-        <Test()> Public Sub 四桁ではない五桁の数字を渡したときはFalse()
-
-            Assert.IsFalse(sut.IsPlayerInputIsCorrect("00000"))
+            Assert.IsTrue(sut.IsPlayerInputIsCorrect(inputNumber, numberOfDigits))
 
         End Sub
 
-        <Test()> Public Sub 四桁の数字ではない空文字を渡したときはFalse()
+        <TestCase("00000", 4)>
+        <TestCase("0000", 5)>
+        Public Sub 指定桁ではない桁の数字を渡したときはFalse(inputNumber As String, numberOfDigits As Integer)
 
-            Assert.IsFalse(sut.IsPlayerInputIsCorrect(""))
-
-        End Sub
-
-        <Test()> Public Sub 数字以外の文字を含むときはFalse()
-
-            Assert.IsFalse(sut.IsPlayerInputIsCorrect("1.56"))
+            Assert.IsFalse(sut.IsPlayerInputIsCorrect(inputNumber, numberOfDigits))
 
         End Sub
 
-        <Test()> Public Sub 数字以外の文字を渡したときはFalse()
+        <TestCase("", 4)>
+        <TestCase("1.56", 4)>
+        <TestCase("aaaa", 4)>
+        Public Sub 受け付けない文字を渡したときはFalse(inputString As String, numberOfDigits As Integer)
 
-            Assert.IsFalse(sut.IsPlayerInputIsCorrect("aaaa"))
+            Assert.IsFalse(sut.IsPlayerInputIsCorrect(inputString, numberOfDigits))
 
         End Sub
 
         <Test()> Public Sub ShowAnswerを正しく渡すとTrue()
 
-            Assert.IsTrue(sut.IsPlayerInputIsCorrect("ShowAnswer"))
+            Assert.IsTrue(sut.IsPlayerInputIsCorrect("ShowAnswer", 4))
 
         End Sub
 
-        <Test()> Public Sub ShowAnswerを大文字で渡したときはFalse()
+        <TestCase("SHOWANSWER", 4)>
+        <TestCase("showanswer", 4)>
+        Public Sub ShowAnswerを正しく渡さないときはFalse(inputString As String, numberOfDigits As Integer)
 
-            Assert.IsFalse(sut.IsPlayerInputIsCorrect("SHOWANSWER"))
-
-        End Sub
-
-        <Test()> Public Sub ShowAnswerを小文字で渡したときはFalse()
-
-            Assert.IsFalse(sut.IsPlayerInputIsCorrect("showanswer"))
+            Assert.IsFalse(sut.IsPlayerInputIsCorrect(inputString, numberOfDigits))
 
         End Sub
 
-        <Test()> Public Sub giveupを渡すとTrue()
+        <TestCase("giveup", 4)>
+        <TestCase("GIVEUP", 4)>
+        <TestCase("GiVeUP", 4)>
+        Public Sub giveupを渡すとTrue(inputString As String, numberOfDigits As Integer)
 
-            Assert.IsTrue(sut.IsPlayerInputIsCorrect("giveup"))
-
-        End Sub
-
-        <Test()> Public Sub giveupを大文字小文字混合で渡すとTrue()
-
-            Assert.IsTrue(sut.IsPlayerInputIsCorrect("GiVeUP"))
+            Assert.IsTrue(sut.IsPlayerInputIsCorrect(inputString, numberOfDigits))
 
         End Sub
 
