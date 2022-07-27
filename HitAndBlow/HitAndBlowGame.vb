@@ -4,13 +4,13 @@ Public Class HitAndBlowGame
     ''' <summary>
     ''' ヒット＆ブローの処理をする
     ''' </summary>
-    Public Sub HitAndBlow()
+    Public Sub HitAndBlow(numberOfDigits As Integer)
         Dim hit As Integer = 0
-        Dim computerAnswer As Char() = MakeComputerNumber()
+        Dim computerAnswer As Char() = MakeComputerNumber(numberOfDigits)
         Dim turnCount As Integer = 0
-        While hit <> 4
+        While hit <> numberOfDigits
             Dim computerNumber As New List(Of Char)(computerAnswer)
-            Dim playerAnswer As String = GetPlayerAnswer()
+            Dim playerAnswer As String = GetPlayerAnswer(numberOfDigits)
             If "giveup".Equals(playerAnswer, StringComparison.OrdinalIgnoreCase) Then
                 AbandonTheGame(computerAnswer)
                 Exit Sub
@@ -23,7 +23,7 @@ Public Class HitAndBlowGame
             turnCount += 1
             hit = CountNumberOfHit(computerNumber, playerNumber)
 
-            If hit < 4 Then
+            If hit < numberOfDigits Then
 
                 'hitした数字はblowでは比較しないので削除します。hitの位置を記録します
                 Dim hitIndexs As New List(Of Integer)(GetHitIndexs(computerNumber, playerNumber))
@@ -129,35 +129,37 @@ Public Class HitAndBlowGame
     End Function
 
     ''' <summary>
-    ''' コンピュータの数字を四桁ランダムに生成します
+    ''' コンピュータの数字を指定桁ランダムに生成します
     ''' </summary>
     ''' <returns></returns>
-    Public Function MakeComputerNumber() As Char()
-        Dim random = New System.Random
-        Const RANDOM_NUMBER_WILL_BE_ENTERED As Integer = -1
-        Dim randomNumber As Integer() = {random.Next(10), RANDOM_NUMBER_WILL_BE_ENTERED,
-            RANDOM_NUMBER_WILL_BE_ENTERED, RANDOM_NUMBER_WILL_BE_ENTERED}
+    Public Function MakeComputerNumber(numberOfDigits As Integer) As Char()
+        Dim originArray As Char() = {"0"c, "1"c, "2"c, "3"c, "4"c, "5"c, "6"c, "7"c, "8"c, "9"c}
 
-        Dim i As Integer = 1
-        While i < 4
+        originArray = Shuffle(originArray)
 
-            Dim newNumber As Integer = random.Next(10)
-            'randomNumber配列にnewNumberが含まれていなければ中に入る
-            If Not (randomNumber.Contains(newNumber)) Then
-                randomNumber(i) = newNumber
-                i += 1
-            End If
-
-        End While
-        'randomNumberをStringに変換
-        Dim randomNumberString As String = Nothing
-        For j As Integer = 0 To 3
-            randomNumberString &= randomNumber(j).ToString
-        Next
-
-        Dim computerNumber As Char() = randomNumberString.ToCharArray
+        Dim computerNumber As Char() = New ArraySegment(Of Char)(originArray, 0, numberOfDigits).ToArray()
 
         Return computerNumber
+
+    End Function
+
+    ''' <summary>
+    ''' 配列の中身をシャッフルする
+    ''' </summary>
+    ''' <param name="originArray"></param>
+    ''' <returns></returns>
+    Public Function Shuffle(originArray As Char()) As Char()
+        Dim returnArray As Char() = originArray
+        Dim random As New System.Random()
+
+        For i As Integer = returnArray.Length - 1 To 1 Step -1
+            Dim j As Integer = random.Next(i + 1)
+            Dim nextINumber As Char = returnArray(j)
+            returnArray(j) = returnArray(i)
+            returnArray(i) = nextINumber
+        Next
+
+        Return returnArray
 
     End Function
 
@@ -182,19 +184,19 @@ Public Class HitAndBlowGame
 
     ''' <summary>
     ''' プレイヤーから適切な入力がされるまで数字の入力を求める
-    ''' 適切な入力とは、4桁の整数もしくは、ShowAnswer
+    ''' 適切な入力とは、指定桁の整数もしくは、ShowAnswer、giveup
     ''' </summary>
-    Private Function GetPlayerAnswer() As String
+    Private Function GetPlayerAnswer(numberOfDigits As Integer) As String
 
         While True
 
             Console.Write("数字を入力してください：")
             Dim playerInput As String = Console.ReadLine()
 
-            If IsPlayerInputIsCorrect(playerInput) Then
+            If IsPlayerInputIsCorrect(playerInput, numberOfDigits) Then
                 Return playerInput
             Else
-                Console.WriteLine("受け取った数値は４桁の整数ではありません")
+                Console.WriteLine("入力された数字は" & numberOfDigits & "桁の整数ではありません")
             End If
 
         End While
@@ -206,8 +208,8 @@ Public Class HitAndBlowGame
     ''' </summary>
     ''' <param name="playerInput"></param>
     ''' <returns></returns>
-    Public Function IsPlayerInputIsCorrect(playerInput As String) As Boolean
-        Return (Regex.IsMatch(playerInput, "^[0-9]{1,4}$") AndAlso playerInput.Length = 4) OrElse
+    Public Function IsPlayerInputIsCorrect(playerInput As String, numberOfDigits As Integer) As Boolean
+        Return Regex.IsMatch(playerInput, "^[0-9]{" & numberOfDigits & "}$") OrElse
             "giveup".Equals(playerInput, StringComparison.OrdinalIgnoreCase) OrElse
             "ShowAnswer".Equals(playerInput)
     End Function
