@@ -77,16 +77,11 @@ Public Class HitAndBlowGame
     ''' <returns></returns>
     Public Function CountNumberOfBlow(computerNumber As List(Of Char), playerNumber As List(Of Char)) As Integer
         Dim blow As Integer = 0
-        Dim playerNumberForComparison As New List(Of Char)(playerNumber)
 
-        For i As Integer = 0 To computerNumber.Count - 1
-            For j As Integer = 0 To playerNumberForComparison.Count - 1
-                If computerNumber(i) = playerNumberForComparison(j) Then
-                    blow += 1
-                    playerNumberForComparison.RemoveAt(j)
-                    Exit For
-                End If
-            Next
+        For Each number As Char In computerNumber
+            If playerNumber.Contains(number) Then
+                blow += 1
+            End If
         Next
 
         Return blow
