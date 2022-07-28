@@ -1,6 +1,6 @@
 ﻿Imports System.Text.RegularExpressions
 Public Class HitAndBlowGame
-
+    Private ReadOnly timer As New System.Diagnostics.Stopwatch()
     ''' <summary>
     ''' ヒット＆ブローの処理をする
     ''' </summary>
@@ -8,6 +8,7 @@ Public Class HitAndBlowGame
         Dim hit As Integer = 0
         Dim computerAnswer As Char() = MakeComputerNumber(numberOfDigits)
         Dim turnCount As Integer = 0
+        timer.Start()
         While hit <> numberOfDigits
             Dim computerNumber As New List(Of Char)(computerAnswer)
             Dim playerAnswer As String = GetPlayerAnswer(numberOfDigits)
@@ -24,6 +25,7 @@ Public Class HitAndBlowGame
             hit = CountNumberOfHit(computerNumber, playerNumber)
 
             If hit = numberOfDigits Then
+                timer.Stop()
                 Exit While
             End If
 
@@ -218,7 +220,7 @@ Public Class HitAndBlowGame
     ''' <param name="turn"></param>
     Private Sub ShowTheScreenOfGamePassed(turn As Integer)
         Console.WriteLine("正解です！ゲームクリア！")
-        Console.WriteLine("正解まで" & turn & "手")
+        Console.WriteLine($"正解まで{turn}手、クリアタイム {timer.Elapsed:mm\:ss\.ff}")
     End Sub
 
 End Class
